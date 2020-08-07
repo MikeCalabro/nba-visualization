@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # nba_data.csv downloaded from Kaggle
 nba = pd.read_csv("nba_data.csv", index_col=0)
@@ -63,7 +64,8 @@ print(nba
 
 # Creates a list of leading all time scorers whose careers started in `96 or later
 # Need to turn draft_year into an int first :p
-print(nba
+career_point_leaders = (
+      nba
       .loc[nba.draft_year > 1995]
       .loc[:, ['player_name', 'draft_year', 'total_points']]
       .groupby(['player_name', 'draft_year'])
@@ -71,4 +73,14 @@ print(nba
       .sort_values(by='total_points', ascending=False)
       .iloc[0:15]
       .rename(columns={'total_points': 'career_points'})
+      .reset_index()
       )
+
+print(career_point_leaders)
+
+# Plots the career point leaders
+fig, ax = plt.subplots()
+ax.bar(x=career_point_leaders.player_name, height=career_point_leaders.career_points)
+fig.autofmt_xdate()
+plt.show()
+
