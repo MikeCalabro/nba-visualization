@@ -12,3 +12,6 @@ nba = pd.read_csv("nba_data.csv", index_col=0)
 
 # Shows the head and tail of the data in PyCharm
 print(nba)
+
+# Select [all rows, [some columns]].arrange by points scored.print the top x columns
+print(nba.loc[:, ['player_name', 'season', 'pts']].sort_values(by='pts', ascending=False).iloc[0:30])
