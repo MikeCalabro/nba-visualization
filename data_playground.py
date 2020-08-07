@@ -15,6 +15,8 @@ pd.set_option('display.max_columns', 30)
 print(nba)
 
 
+# THE CODE BELOW IS FOR THE PURPOSE OF CLEANING THE DATA
+#
 # Function to fix the season column to be a single year int
 # For each row, the season column now = only the first four digits, +1 ('2018/19' -> 2018), (2018 -> 2019)
 def fix_season(row):
@@ -49,7 +51,11 @@ def draft_year_int(row):
 
 nba = nba.apply(draft_year_int, axis='columns')
 
+# Makes a clean csv file to be used for visualizations
+nba.to_csv(path_or_buf="nba_clean.csv", index=False)
 
+# CLEANING DONE
+# Now we can explore
 # Select [all rows, [some columns]].sort by points_scored.print the top x (15) columns
 print(nba.loc[:, ['player_name', 'season', 'pts']].sort_values(by='pts', ascending=False).iloc[0:15])
 
@@ -81,6 +87,8 @@ print(career_point_leaders)
 # Plots the career point leaders
 fig, ax = plt.subplots()
 ax.bar(x=career_point_leaders.player_name, height=career_point_leaders.career_points)
+ax.set_ylabel('Career Points')
+ax.set_title('Career Point Leaders For Players Drafted After 1995')
+# Code below tilts the x-axis names so they don't overlap
 fig.autofmt_xdate()
 plt.show()
-
