@@ -24,6 +24,31 @@ def fix_season(row):
 # Applies the function above to the nba data frame
 nba = nba.apply(fix_season, axis='columns')
 
+# Adding a total_points for the season column
+nba['total_points'] = 0
+
+
+def total_points(row):
+    row.total_points = round(row.pts * row.gp)
+    return row
+
+
+nba = nba.apply(total_points, axis='columns')
+
+
+# Turning draft_year into an int instead of a char
+# Changing "Undrafted" Years into 0's
+def draft_year_int(row):
+    if row.draft_year != "Undrafted":
+        row.draft_year = int(row.draft_year)
+    else:
+        row.draft_year = 0
+    return row
+
+
+nba = nba.apply(draft_year_int, axis='columns')
+
+
 # Select [all rows, [some columns]].sort by points_scored.print the top x (15) columns
 print(nba.loc[:, ['player_name', 'season', 'pts']].sort_values(by='pts', ascending=False).iloc[0:15])
 
@@ -36,3 +61,14 @@ print(nba
       .set_index('season')
       )
 
+# Creates a list of leading all time scorers whose careers started in `96 or later
+# Need to turn draft_year into an int first :p
+print(nba
+      .loc[nba.draft_year > 1995]
+      .loc[:, ['player_name', 'draft_year', 'total_points']]
+      .groupby(['player_name', 'draft_year'])
+      .sum()
+      .sort_values(by='total_points', ascending=False)
+      .iloc[0:15]
+      .rename(columns={'total_points': 'career_points'})
+      )
