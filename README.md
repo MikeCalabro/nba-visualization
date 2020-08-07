@@ -1,4 +1,4 @@
-# pycharm-test-namechange
-attempting linking github to pycharm
+# nba-visualization
+first time linking github to PyCharm
 
-mission complete. That's all for this repo
+Now I will be creating some nba visualizations
