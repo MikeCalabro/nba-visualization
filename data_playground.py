@@ -11,10 +11,6 @@ pd.set_option('display.width', desired_width)
 np.set_printoptions(linewidth=desired_width)
 pd.set_option('display.max_columns', 30)
 
-# Shows the head and tail of the data in PyCharm
-print(nba)
-
-
 # THE CODE BELOW IS FOR THE PURPOSE OF CLEANING THE DATA
 #
 # Function to fix the season column to be a single year int
@@ -51,21 +47,10 @@ def draft_year_int(row):
 
 nba = nba.apply(draft_year_int, axis='columns')
 
+# Shows the head and tail of the data in PyCharm
 print(nba)
 
 # Makes a clean csv file to be used for visualizations
 nba.to_csv(path_or_buf="nba_clean.csv", index=False)
 
-# CLEANING DONE
-# Now we can explore
-# Select [all rows, [some columns]].sort by points_scored.print the top x (15) columns
-print(nba.loc[:, ['player_name', 'season', 'pts']].sort_values(by='pts', ascending=False).iloc[0:15])
 
-# Selects the name, pts per game, and assists per game, of the highest scoring player (per game) from each season
-# I don't know if this is the best way to organize the command, but it was getting long
-print(nba
-      .loc[:, ['player_name', 'season', 'pts', 'ast']]
-      .groupby(['season'])
-      .apply(lambda group: group.loc[group.pts.idxmax()])
-      .set_index('season')
-      )
