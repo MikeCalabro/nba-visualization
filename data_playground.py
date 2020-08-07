@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from matplotlib import pyplot as plt
 
 # Code below allows me to view entire table when I print it (in PyCharm IDE)
 desired_width = 320
@@ -14,16 +13,16 @@ nba = pd.read_csv("nba_data.csv", index_col=0)
 # Shows the head and tail of the data in PyCharm
 print(nba)
 
-# Select [all rows, [some columns]].arrange by points scored.print the top x columns
-print(nba.loc[:, ['player_name', 'season', 'pts']].sort_values(by='pts', ascending=False).iloc[0:30])
-
 
 # Function to fix the season column to be a single year int
+# For each row, the season column now = only the first four digits, +1 ('2018/19' -> 2018), (2018 -> 2019)
 def fix_season(row):
     row.season = int(row.season[0:4]) + 1
     return row
 
 
-# Applies the function above to the nba dataframe
+# Applies the function above to the nba data frame
 nba = nba.apply(fix_season, axis='columns')
 
+# Select [all rows, [some columns]].sort by points_scored.print the top x (15) columns
+print(nba.loc[:, ['player_name', 'season', 'pts']].sort_values(by='pts', ascending=False).iloc[0:15])
