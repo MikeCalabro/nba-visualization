@@ -26,3 +26,12 @@ nba = nba.apply(fix_season, axis='columns')
 
 # Select [all rows, [some columns]].sort by points_scored.print the top x (15) columns
 print(nba.loc[:, ['player_name', 'season', 'pts']].sort_values(by='pts', ascending=False).iloc[0:15])
+
+# Selects the name and total points scored of the highest scoring player from each season
+# I don't know if this is the best way to organize the command, but it was getting long
+print(nba
+      .loc[:, ['player_name', 'season', 'pts']]
+      .groupby(['season'])
+      .apply(lambda group: group.loc[group.pts.idxmax()])
+      .set_index('season')
+      )
