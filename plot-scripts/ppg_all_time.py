@@ -3,7 +3,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-nba_clean = pd.read_csv("nba_clean.csv")
+nba_clean = pd.read_csv("~/PycharmProjects/pycharm-test/nba_clean.csv")
 
 
 # Easier to plot if the season is a string
