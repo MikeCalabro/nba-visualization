@@ -22,6 +22,7 @@ nba_teams = league_points['team_abbreviation'].unique()
 for team in nba_teams[0:6]:
     team_points = league_points.total_points[league_points.team_abbreviation == team]
     sns.lineplot(league_points.season, team_points, label=team)
+plt.grid(alpha=0.4)
 plt.xlabel('Season')
 plt.ylabel('Team Points Scored')
 plt.show()

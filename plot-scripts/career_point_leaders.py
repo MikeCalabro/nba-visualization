@@ -25,6 +25,7 @@ print(career_point_leaders)
 
 # Plots the career point leaders
 fig, ax = plt.subplots()
+ax.grid(axis='y', alpha=0.4)
 ax.bar(x=career_point_leaders.player_name, height=career_point_leaders.career_points)
 ax.set_ylabel('Career Points')
 ax.set_title('Career Point Leaders For Players Drafted After 1995')
