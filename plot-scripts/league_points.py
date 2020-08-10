@@ -25,4 +25,5 @@ for team in nba_teams[0:6]:
 plt.grid(alpha=0.4)
 plt.xlabel('Season')
 plt.ylabel('Team Points Scored')
+plt.title('Total Points Scored For Select Teams From 1997-2020')
 plt.show()
