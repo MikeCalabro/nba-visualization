@@ -1,10 +1,8 @@
-# nba-visualization  
+# NBA Visualization  
 
-first time linking github to PyCharm
+Honing in my pandas/matplotlib skills with NBA player statistics  
 
-Now I will be creating some nba visualizations
-
-# PLOTS/TABLES/GRAPHS
+# Plots/Tables/Graphs
 
 Each file in plot-scripts creates its own unique visualization  
 
